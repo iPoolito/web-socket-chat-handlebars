@@ -21,4 +21,10 @@ app.use('/', viewsRouter)
 
 socketServer.on('connection', socket => {
     console.log('Nuevo cliente conectado')
+    socket.on('message', data => {
+        console.log(data)
+    })
+    socket.emit('evento_para_scoket_individual', 'Este mensaje solo lo debe recibir el socket')
+    socket.broadcast.emit('evento_para_todos_menos_el_socket_actual', "Este evento lo veran todos los sockets conectados, MENOS el socket acutal desde el que se envio el mensjae")
+    socketServer.emit('evento_para_todos', 'Este mensaje lo reciben todos los sockets conectados')
 })
