@@ -18,3 +18,7 @@ app.set('view engine', 'handlebars')
 //Importante para archivos de js y css en plantillas
 app.use(express.static(__dirname + '/public'))
 app.use('/', viewsRouter)
+
+socketServer.on('connection', socket => {
+    console.log('Nuevo cliente conectado')
+})
